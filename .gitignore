@@ -1,0 +1,16 @@
+pom.xml
+pom.xml.asc
+*.iml
+*.jar
+*.class
+/lib/
+/classes/
+/target/
+/checkouts/
+.idea/
+.lein-deps-sum
+.lein-repl-history
+.lein-plugins/
+.lein-failures
+.nrepl-port
+.cpcache/
