@@ -5,7 +5,8 @@
     [repl.repl.user :as user]))
 
 ;; Constrained list (i.e. a set) of users per team
-(spec/def ::members (spec/coll-of ::user/user :distinct true))
+(spec/def ::members
+  (spec/coll-of ::user/user :distinct true))
 
 ;; Hopefully relatable name - see repl.repl.factory
 (spec/def ::name ::general/string-data)
@@ -17,13 +18,15 @@
 (spec/def ::prepl any?)
 
 ;; Appropriate data set per team
-(spec/def ::team (spec/keys :req [::name
-                            ::members
-                            ::prepl
-                            ::secret]))
+(spec/def ::team
+  (spec/keys :req [::name
+                   ::members
+                   ::prepl
+                   ::secret]))
 
 ;; Global set of teams
-(spec/def ::teams (spec/coll-of ::team :distinct true))
+(spec/def ::teams
+  (spec/coll-of ::team :distinct true))
 
 
 

@@ -1,6 +1,8 @@
-{:deps    {org.clojure/clojure          {:mvn/version "1.10.0"}
-           org.clojure/test.check       {:mvn/version "0.10.0-alpha3"}} 
- :aliases {:repl {:main-opts ["-r"]}}}
+{:deps    {org.clojure/clojure    {:mvn/version "1.10.0"}
+           org.clojure/test.check {:mvn/version "0.10.0-alpha3"}}
+ :aliases {:repl      {:main-opts ["-r"]}
+           :clj-kondo {:extra-deps {clj-kondo {:mvn/version "RELEASE"}}
+                       :main-opts  ["-m" "clj-kondo.main"]}}}
 
 
 

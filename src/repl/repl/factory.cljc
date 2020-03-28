@@ -1,8 +1,6 @@
 (ns repl.repl.factory
   (:require
-    [repl.repl.general :as general]
-    [repl.repl.team-names :as team-names]
-    [repl.repl.user :as user]))
+    [repl.repl.team-names :as team-names]))
 
 (defn team-name
   []
