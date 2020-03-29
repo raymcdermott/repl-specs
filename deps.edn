@@ -1,15 +1,18 @@
-{:deps    {org.clojure/clojure       {:mvn/version "1.10.1"}
-           org.clojure/clojurescript {:mvn/version "1.10.520"}
-           org.clojure/test.check    {:mvn/version "0.10.0"}}
+{:deps
+ {org.clojure/clojure       {:mvn/version "1.10.1"}
+  org.clojure/clojurescript {:mvn/version "1.10.597"}
+  org.clojure/test.check    {:mvn/version "0.10.0"}}
 
- :aliases {:repl      {:main-opts ["-r"]}
-           :clj-kondo {:extra-deps {clj-kondo {:mvn/version "RELEASE"}}
-                       :main-opts  ["-m" "clj-kondo.main"]}
-           :cljs-test {:extra-paths ["test"]
-                       :extra-deps {olical/cljs-test-runner {:mvn/version "3.7.0"}}
-                       :main-opts  ["-m" "cljs-test-runner.main"]}
-           :clj-test  {:extra-paths ["test"]
-                       :extra-deps  {com.cognitect/test-runner {:git/url "https://github.com/cognitect-labs/test-runner.git"
-                                                                :sha     "209b64504cb3bd3b99ecfec7937b358a879f55c1"}}
-                       :main-opts   ["-m" "cognitect.test-runner"]}}}
+ :aliases
+ {:repl      {:main-opts ["-r"]}
+  :clj-kondo {:extra-deps {clj-kondo {:mvn/version "RELEASE"}}
+              :main-opts  ["-m" "clj-kondo.main"]}
+  :cljs-test {:extra-paths ["test"]
+              :extra-deps  {olical/cljs-test-runner {:mvn/version "3.7.0"}}
+              :main-opts   ["-m" "cljs-test-runner.main"]}
+  :clj-test  {:extra-paths ["test"]
+              :extra-deps  {com.cognitect/test-runner
+                            {:git/url "https://github.com/cognitect-labs/test-runner.git"
+                             :sha     "209b64504cb3bd3b99ecfec7937b358a879f55c1"}}
+              :main-opts   ["-m" "cognitect.test-runner"]}}}
 
