@@ -2,6 +2,7 @@
   (:require
     [clojure.spec.alpha :as spec]
     [repl.repl.general :as general]
+    [repl.repl.team-names :as team-names]
     [repl.repl.user :as user]))
 
 ;; Constrained list (i.e. a set) of users per team
@@ -29,5 +30,8 @@
   (spec/coll-of ::team :distinct true))
 
 
+(defn ->team-name
+  []
+  (team-names/gen-name))
 
 

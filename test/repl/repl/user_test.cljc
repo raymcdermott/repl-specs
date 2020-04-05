@@ -15,4 +15,8 @@
       (is (= (user/->user "x" "x0")
              (user/find-user
                "x"
+               (user/+user users (user/->user "x" "x0")))))
+      (is (= users
+             (user/other-users
+               "x"
                (user/+user users (user/->user "x" "x0"))))))))

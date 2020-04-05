@@ -21,6 +21,10 @@
             (spec/every (fn [[k v]]
                           (= (keyword (::name v)) k)))))
 
+;; ---------------------------------------------------------
+;;
+;; ---> Shared functions
+
 (defn ->user
   "Create a user map"
   [name uid]
@@ -33,7 +37,7 @@
            :ret ::user)
 
 (defn user->users
-  "Create a users map from `user`"
+  "Create a ::users map from `user`"
   [user]
   {(keyword (::name user)) user})
 
@@ -72,8 +76,18 @@
            :ret (spec/or :user ::user
                          :nil nil?))
 
+(defn other-users
+  "All users except `name` in `users`"
+  [name users]
+  (dissoc users (keyword name)))
+
+(spec/fdef find-user
+           :args (spec/cat :name ::name
+                           :users ::users)
+           :ret ::users)
+
 (defn get-user-by-uid
-  "Get the user map matching `user-uid` in `users`"
+  "Get the ::user map matching `user-uid` in `users`"
   [user-uid users]
   (first (map (fn [[_ {::keys [uid] :as user}]]
                 (when (= user-uid uid) user))
@@ -88,8 +102,7 @@
 (defn get-uids
   "Get the uid list from `users`"
   [users]
-  (map (fn [[_ {::keys [uid]}]] uid)
-       users))
+  (map (fn [[_ {::keys [uid]}]] uid) users))
 
 (spec/fdef get-uids
            :args (spec/cat :users ::users)
