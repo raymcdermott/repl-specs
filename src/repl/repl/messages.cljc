@@ -1,8 +1,8 @@
 (ns repl.repl.messages
   (:require [clojure.spec.alpha :as spec]
+            [clojure.spec.test.alpha :as stest]
             [repl.repl.user :as user]
             [repl.repl.team :as team]
-            [repl.repl.completions :as completions]
             [repl.repl.general :as general]))
 
 ;; TEAM BOOTSTRAP / LOGIN / LOGOUT
@@ -39,25 +39,21 @@
 
 ;; KEYSTROKES
 
-;; String of (hopefully) Clojure forms
+;; String of (hopefully) Clojure form[s]
 (spec/def ::form ::general/string-data)
 
-;; TODO ?? make the new keystrokes explicit as :diff
+;; TODO - send the CM 'change' object? to assist
+;; with completions etc?
 (spec/def ::keystrokes
-  (spec/keys :req [::form ::team/name ::user/name]))
-
-(spec/def ::keystrokes-event
-  (spec/merge ::keystrokes
-              (spec/keys :req [::completions/completions])))
-
+  (spec/keys :req [::form ::user/user]))
 
 ;; REPL EVALUATION
 
-(spec/def ::source #{::user ::system})
+(spec/def ::source #{:user :system})
 (spec/def ::forms (spec/coll-of ::form))
 
 (spec/def ::remote-eval
-  (spec/keys :req [::form ::team/name ::source ::forms]))
+  (spec/keys :req [::form ::source ::user/user ::forms]))
 
 (def tags #{:ret :out :err :tap})
 (spec/def ::tag (spec/with-gen keyword? #(spec/gen tags)))
@@ -78,3 +74,22 @@
 (spec/def ::remote-eval-event
   (spec/merge ::remote-eval
               (spec/keys :req [::eval-result])))
+
+
+;; ---------------------------------------------------------
+;;
+;; ---> Shared functions
+
+(defn ->keystrokes
+  "Create a map for sharing new keystrokes"
+  [form user]
+  {::form      form
+   ::user/user user})
+
+(spec/fdef ->keystrokes
+           :args (spec/cat :form ::form
+                           :user ::user/user)
+           :ret ::keystrokes)
+
+;; Check all calls
+(stest/instrument)

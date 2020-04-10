@@ -81,7 +81,7 @@
   [name users]
   (dissoc users (keyword name)))
 
-(spec/fdef find-user
+(spec/fdef other-users
            :args (spec/cat :name ::name
                            :users ::users)
            :ret ::users)
