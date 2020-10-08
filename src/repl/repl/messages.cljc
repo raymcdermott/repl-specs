@@ -39,9 +39,8 @@
 
 ;; KEYSTROKES
 
-;; Communicated via a patch to the existing copy of the form which might be the empty string
-(spec/def ::patch #?(:clj  any?
-                     :cljs object?))
+;; Communicated via a patch
+(spec/def ::patch any?)
 
 (spec/def ::keystrokes
   (spec/keys :req [::patch ::user/user]))
