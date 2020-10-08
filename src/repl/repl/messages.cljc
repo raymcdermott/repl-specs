@@ -39,13 +39,12 @@
 
 ;; KEYSTROKES
 
-;; String of (hopefully) Clojure form[s]
-(spec/def ::form ::general/string-data)
+;; Communicated via a patch to the existing copy of the form which might be the empty string
+(spec/def ::patch #?(:clj  any?
+                     :cljs object?))
 
-;; TODO - send the CM 'change' object? to assist
-;; with completions etc?
 (spec/def ::keystrokes
-  (spec/keys :req [::form ::user/user]))
+  (spec/keys :req [::patch ::user/user]))
 
 ;; REPL EVALUATION
 
@@ -82,12 +81,12 @@
 
 (defn ->keystrokes
   "Create a map for sharing new keystrokes"
-  [form user]
-  {::form      form
+  [patch user]
+  {::patch     patch
    ::user/user user})
 
 (spec/fdef ->keystrokes
-           :args (spec/cat :form ::form
+           :args (spec/cat :patch ::patch
                            :user ::user/user)
            :ret ::keystrokes)
 
