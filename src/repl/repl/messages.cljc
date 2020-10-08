@@ -63,12 +63,12 @@
 (spec/def ::form ::general/string-data)
 (def phase-indicators #{:read-source :macro-syntax-check :macroexpansion :compile-syntax-check
                         :compilation :execution :read-eval-result :print-eval-result})
-(spec/def ::phase-error
+(spec/def ::phase
   (spec/with-gen keyword? #(spec/gen phase-indicators)))
 
 (spec/def ::eval-result
-  (spec/keys :req-un [::tag ::val]
-             :opt-un [::ms ::ns ::form ::phase-error]))
+  (spec/keys :req-un [::tag ::val ::user]
+             :opt-un [::ms ::ns ::form ::phase]))
 
 ;; Sent to all team members
 (spec/def ::remote-eval-event
